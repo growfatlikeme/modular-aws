@@ -1,29 +1,23 @@
 #variables specific to network module depending on tfvars invoked, may override
-/*
-variable "name" {
-    type = string
-    description = "tag my resources"
-    default     = "estee"
-} 
 
-variable "aws_region" {
-  type        = string
-  description = "AWS region to deploy resources"
+variable "name" {
+  type = string
+  description = "Ownership of resources"
 }
 
 variable "environment" {
-  type        = string
+  type = string
   description = "Environment type (dev, staging, prod)"
 }
 
-variable "instance_type" {
-  type        = string
-  description = "EC2 instance type"
+variable "aws_region" {
+  type    = string
+  description = "AWS region to deploy resources"
 }
 
 variable "myvpc_cidr" {
- type        = string
- description = "VPC CIDR range"
+  type = string
+  description = "VPC CIDR range"
 }
 
 variable "public_subnet_cidrs" {
@@ -44,22 +38,4 @@ variable "database_subnet_cidrs" {
 variable "azs" {
  type        = list(string)
  description = "Availability Zones"
-}
-
-variable "tagging" {
-  type        = string
-  description = "Tagging my resources"
-}
-*/
-
-variable "myvpc_cidr" {
-  type = string
-}
-
-variable "name" {
-  type = string
-}
-
-variable "environment" {
-  type = string
 }

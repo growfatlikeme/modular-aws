@@ -22,16 +22,3 @@ locals {
 locals {
   name_prefix = "${var.name}-${var.environment}"
 }
-
-
-
-/*
-resource "aws_security_group" "allow_ssh" {
-  name = "${local.name_prefix}-allow-ssh"
-}
-
-resource "aws_s3_bucket" "assets" {
-  bucket = "${local.name_prefix}-assets"
-}
-
-*/
