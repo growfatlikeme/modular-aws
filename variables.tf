@@ -62,3 +62,24 @@ variable "database_subnet_cidrs" {
  type        = list(string)
  description = "Database Subnet CIDR values"
 }
+
+################################################################################
+# EC2 Instance
+################################################################################
+
+
+variable "instance_type" {
+  description = "The type of instance to use for compute resources"
+  type        = string
+}
+
+
+################################################################################
+# Security Groups
+################################################################################
+/*
+variable "sg_bastion_id" {
+  description = "The name of the bastion security group"
+  type        = string
+}
+*/
