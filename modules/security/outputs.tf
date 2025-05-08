@@ -5,7 +5,8 @@ output "sg_bastion_id" {  # Changed from sg-bastion_id to sg_bastion_id
   value       = aws_security_group.bastion_allow_ssh.id
 }
 
+
 output "key_pair_name" {
   description = "Name of the created key pair"
-  value       = var.enable_ssh_key ? aws_key_pair.key_pair[0].key_name : null
+  value       = aws_key_pair.bastion_key.key_name
 }

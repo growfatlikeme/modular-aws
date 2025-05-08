@@ -89,3 +89,13 @@ variable "enable_ssh_key" {
   type = bool
   description = "Enable SSH key pair creation"
 }
+
+################################################################################
+# SNS Modules
+################################################################################
+
+
+variable "cart_count" {
+  description = "Number of cart topics to create"
+  type        = number
+}

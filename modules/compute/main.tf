@@ -32,6 +32,13 @@ locals {
 
 # Define local variables for the module
 # In modules/compute/main.tf
+
+resource "null_resource" "wait_for_key_pair" {
+  triggers = {
+    key_name = var.key_name
+  }
+}
+
 resource "aws_instance" "bastion" {
   for_each = local.subnet_map
 
@@ -54,12 +61,15 @@ resource "aws_instance" "bastion" {
     create_before_destroy = true
   }
   
+  depends_on = [null_resource.wait_for_key_pair]
+
   timeouts {
     create = "5m"
     update = "5m"
     delete = "5m"
   }
 }
+
 
 
 # This resource is used to create a default EC2 instance metadata options

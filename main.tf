@@ -43,5 +43,11 @@ module "compute" {
 }
 
 
+module "app_topics" {
+ source      = "./modules/app_topics"
+  name       = var.name
+  environment        = var.environment
+  cart_count = var.cart_count
+}
 
 
