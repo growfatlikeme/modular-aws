@@ -23,9 +23,11 @@ module "security" {
   source       = "./modules/security"
   name         = var.name
   environment  = var.environment
+  enable_ssh_key = var.enable_ssh_key
   vpc_id       = module.network.vpc_id
   public_subnet_ids = module.network.public_subnet_ids
   private_subnet_ids = module.network.private_subnet_ids
+  
 }
 
 module "compute" {
@@ -36,7 +38,10 @@ module "compute" {
   instance_type = var.instance_type
   sg_bastion_id = module.security.sg_bastion_id  # Match the exact output name
   public_subnet_ids = module.network.public_subnet_ids
-  depends_on   = [module.network, module.security]
+  key_name         = module.security.key_pair_name  # Reference the output from the security module
+  depends_on       = [module.network, module.security]
 }
+
+
 
 

@@ -75,7 +75,7 @@ variable "instance_type" {
 
 
 ################################################################################
-# Security Groups
+# Security Modules
 ################################################################################
 /*
 variable "sg_bastion_id" {
@@ -83,3 +83,9 @@ variable "sg_bastion_id" {
   type        = string
 }
 */
+
+
+variable "enable_ssh_key" {
+  type = bool
+  description = "Enable SSH key pair creation"
+}

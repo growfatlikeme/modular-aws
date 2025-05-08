@@ -30,3 +30,8 @@ variable "public_subnet_ids" {
   description = "Public subnet IDs"
   
 }
+
+variable "key_name" {
+  description = "Name of the SSH key pair to use for instances"
+  type        = string
+}

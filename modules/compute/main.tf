@@ -37,7 +37,7 @@ resource "aws_instance" "bastion" {
 
   ami                         = data.aws_ami.amazon2023.id 
   instance_type               = var.instance_type
-  
+  key_name                    = var.key_name  # Use the key name passed as a variable
   vpc_security_group_ids      = [var.sg_bastion_id]
   subnet_id                   = each.value
   associate_public_ip_address = true

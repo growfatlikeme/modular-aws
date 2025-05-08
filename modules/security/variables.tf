@@ -22,3 +22,9 @@ variable "private_subnet_ids" {
   type = list(string)
   description = "Private subnet IDs"
 }
+
+variable "enable_ssh_key" {
+  type = bool
+  default = true
+  description = "Enable SSH key pair creation"
+}

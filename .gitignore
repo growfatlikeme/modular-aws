@@ -3,7 +3,8 @@
 
 # sensitive files
 *.iam.tf
-*.key_pair.tf
+keypair.tf
+*.pem
 
 #tfstate bucket storage configuration
 setup_backend.sh

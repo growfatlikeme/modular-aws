@@ -2,9 +2,9 @@
 # Network Infrastructure Outputs at root level
 ################################################################################
 
-output "tfstate_bucket_id" {
+output "tfstate_bucket_name" {
   description = " The s3 bucket id used to store the terraform state"
-  value       = module.storage.tfstate_bucket_id
+  value       = module.storage.tfstate_bucket_name
 }
 
 output "vpc_id" {  
