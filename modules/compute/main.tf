@@ -53,6 +53,12 @@ resource "aws_instance" "bastion" {
   lifecycle {
     create_before_destroy = true
   }
+  
+  timeouts {
+    create = "5m"
+    update = "5m"
+    delete = "5m"
+  }
 }
 
 

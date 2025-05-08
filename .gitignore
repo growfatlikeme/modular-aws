@@ -5,6 +5,9 @@
 *.iam.tf
 *.key_pair.tf
 
+#tfstate bucket storage configuration
+setup_backend.sh
+tfstate_bucket.tf
 
 # .tfstate files
 *.tfstate

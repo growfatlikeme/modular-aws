@@ -78,6 +78,12 @@ resource "aws_internet_gateway" "my_igw" {
   tags = {
     Name = "${local.name_prefix}-IGW"
   }
+    
+  timeouts {
+    create = "5m"
+    update = "5m"
+    delete = "5m"
+  }
 }
 
 #Create public route
@@ -114,6 +120,12 @@ resource "aws_nat_gateway" "natgw" {
     
   tags = {
     Name = "${local.name_prefix}-natgw"
+  }
+  
+  timeouts {
+    create = "5m"
+    update = "5m"
+    delete = "5m"
   }
 }
 

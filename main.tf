@@ -1,5 +1,11 @@
 #high level architecture configuration
 
+module "storage" {
+  source = "./modules/storage"
+  name   = var.name 
+  environment = var.environment
+}
+
 module "network" {
   source     = "./modules/network"
   myvpc_cidr = var.myvpc_cidr
