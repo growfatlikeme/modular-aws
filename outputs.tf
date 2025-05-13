@@ -3,9 +3,9 @@
 ################################################################################
 
 # Storage outputs
-output "tfstate_bucket_name" {
+output "tf_bucket_name" {
   description = "The S3 bucket name used to store the Terraform state"
-  value       = module.storage.tfstate_bucket_name
+  value       = module.storage.tf_bucket_name
 }
 
 # Network outputs
