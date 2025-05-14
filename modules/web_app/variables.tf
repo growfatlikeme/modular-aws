@@ -17,14 +17,14 @@ variable "instance_type" {
 
 variable "vpc_id" {
   type = string
+  description = "value of vpc id"
 }
 
-variable "sg_bastion_id" {
+variable "sg_web_app_id" {
   type = string
-  description = "Security group ID for the bastion instance"      
+  description = "Security group ID for the web app instance"      
   
 }
-
 
 variable "public_subnet_ids" {
   type =  list(string)

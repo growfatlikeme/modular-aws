@@ -10,3 +10,9 @@ output "key_pair_name" {
   description = "Name of the created key pair"
   value       = aws_key_pair.bastion_key.key_name
 }
+
+output "sg_web_app_id" {
+  description = "The ID of the web app security group"
+  value       = aws_security_group.web_app_allow_tcp80_443.id
+  
+}

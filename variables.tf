@@ -64,7 +64,7 @@ variable "database_subnet_cidrs" {
 }
 
 ################################################################################
-# EC2 Instance
+# EC2 Instance / WEB APP Modules
 ################################################################################
 
 
@@ -73,16 +73,25 @@ variable "instance_type" {
   type        = string
 }
 
+variable "public_subnet" {
+ description = "Choice of deploying to public or private subnet"
+ type        = bool
+ default = true
+}
+
+
+variable "instance_count" {
+ description = "Count of ec2 instance"
+ type        = number
+ default = 1
+}
+
+
 
 ################################################################################
 # Security Modules
 ################################################################################
-/*
-variable "sg_bastion_id" {
-  description = "The name of the bastion security group"
-  type        = string
-}
-*/
+
 
 
 variable "enable_ssh_key" {

@@ -43,11 +43,23 @@ module "compute" {
 }
 
 
+module "web_app" {
+ source = "./modules/web_app"
+  name       = var.name
+  environment        = var.environment
+ instance_type = var.instance_type
+ vpc_id = module.network.vpc_id  # Pass VPC ID from network module
+ public_subnet_ids = module.network.public_subnet_ids
+ sg_web_app_id = module.security.sg_web_app_id  # pass the security group ID from the security module
+ key_name         = module.security.key_pair_name  # Reference the output from the security module
+  depends_on       = [module.network, module.security]
+}
+
+
 module "app_topics" {
  source      = "./modules/app_topics"
   name       = var.name
   environment        = var.environment
   cart_count = var.cart_count
 }
-
 

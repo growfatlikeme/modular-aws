@@ -51,6 +51,13 @@ output "bastion_key_pair_name" {
   
 }
 
+output "sg_web_app_id" {
+  description = "The ID of the web app security group"
+  value       = module.security.sg_web_app_id
+  
+}
+
+
 # Compute outputs
 output "bastion_instance_ips" {
   description = "Public IP addresses of the bastion instances"
@@ -61,6 +68,18 @@ output "bastion_instance_dns" {
   description = "Public DNS names of the bastion instances"
   value       = module.compute.bastion_instance_dns
 }
+
+# WebApp outputs
+output "web_app_instance_ips" {
+  description = "Public IP addresses of the web app instances"
+  value       = module.web_app.web_app_instance_ip
+}
+
+output "web_app_instance_dns" {
+  description = "Public DNS names of the web app instances"
+  value       = module.web_app.web_app_instance_dns
+}
+
 
 # Application outputs
 output "cart_topic_arns" {
