@@ -57,6 +57,37 @@ output "sg_web_app_id" {
   
 }
 
+output "alb_sg_id" {
+  description = "The ID of the ALB security group"
+  value       = module.security.alb_sg_id
+  
+}
+
+# Scaling Module outputs
+output "web_listener_arn" {
+  description = "ARN of the ALB Listener for the web application"
+  value = module.scaling_web.web_listener_arn
+}
+
+output "lb_arn" {
+  description = "ARN of the ALB  for the web application"
+  value = module.scaling_web.lb_arn
+}
+
+output "web_alb_tg_arn" {
+  description = "ARN of the ALB Target Group for the web application"
+  value = module.scaling_web.web_alb_tg_arn
+}
+
+output "web_alb_dns" {
+  description = "DNS name of the ALB for the web application"
+  value = module.scaling_web.web_alb_dns
+}
+
+output "webapp_url" {
+  description = "URL of the web application"
+  value = module.scaling_web.webapp_url
+}
 
 # Compute outputs
 output "bastion_instance_ips" {
@@ -69,6 +100,7 @@ output "bastion_instance_dns" {
   value       = module.compute.bastion_instance_dns
 }
 
+/*
 # WebApp outputs
 output "web_app_instance_ips" {
   description = "Public IP addresses of the web app instances"
@@ -79,7 +111,7 @@ output "web_app_instance_dns" {
   description = "Public DNS names of the web app instances"
   value       = module.web_app.web_app_instance_dns
 }
-
+*/
 
 # Application outputs
 output "cart_topic_arns" {

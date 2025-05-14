@@ -79,7 +79,6 @@ variable "public_subnet" {
  default = true
 }
 
-
 variable "instance_count" {
  description = "Count of ec2 instance"
  type        = number

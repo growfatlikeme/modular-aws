@@ -13,12 +13,12 @@ resource "aws_instance" "web_app" {
   vpc_security_group_ids      = [var.sg_web_app_id] # Use the security group ID passed as a variable
   subnet_id                   = each.value
   associate_public_ip_address = true
-   user_data = templatefile("${path.module}/init-script.sh", {file_content = "webapp-#${tonumber(each.key) + 1}"})
+  user_data = templatefile("${path.module}/init-script.sh", {file_content = "webapp-#${tonumber(each.key) + 1}"})
 
   user_data_replace_on_change = true # this forces instance to be recreated upon update of user data contents
  
  
- tags = {
+  tags = {
     Name = "${local.name_prefix}-web_app-${tonumber(each.key) + 1}"
   }
 
