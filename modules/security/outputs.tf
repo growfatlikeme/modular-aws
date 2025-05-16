@@ -23,7 +23,7 @@ output "private_key_name" {
 
 output "sg_web_app_id" {
   description = "The ID of the web app security group"
-  value       = aws_security_group.web_app_allow_tcp80_443.id
+  value       = aws_security_group.web_app_allow_tcp80_alb.id
   
 }
 

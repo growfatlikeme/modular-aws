@@ -6,5 +6,6 @@ locals {
     for i, subnet_id in var.public_subnet_ids : i => subnet_id
   }
   */
+  domain_name = "${local.name_prefix}.sctp-sandbox.com"  # e.g., estee-dev.sctp-sandbox.com
 }
 

@@ -30,8 +30,18 @@ output "web_alb_dns" {
   value = aws_lb.web_alb.dns_name
 }
 
-output "webapp_url" {
+output "webapp_url_http" {
   # value = "http://${data.aws_lb.this.dns_name}/${var.name_prefix}"
-  value = "http://${aws_lb.web_alb.dns_name}/index.html"
+  value = "http://${local.domain_name}/index.html"
 }
 
+output "webapp_url_https" {
+  # value = "http://${data.aws_lb.this.dns_name}/${var.name_prefix}"
+  value = "https://${local.domain_name}/index.html"
+}
+
+output "alt_weblink" {
+  description = "ALB DNS web access"
+   value = "https://${aws_lb.web_alb.dns_name}/index.html"
+  
+}

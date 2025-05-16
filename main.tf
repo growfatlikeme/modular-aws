@@ -68,6 +68,7 @@ module "scaling_web" {
   sg_web_app_id = module.security.sg_web_app_id  # pass the security group ID from the security module
   sg_ssh_priv_from_bastion_id = module.security.web_app_allow_ssh_from_bastion_id  # pass the security group ID from the security module
   key_name         = module.security.private_key_name  # Reference the output from the security module
+  base_domain = "scaling-web.com"  # Domain name for the certificate
   depends_on       = [module.network, module.security]
 }
 

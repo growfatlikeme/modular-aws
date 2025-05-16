@@ -66,3 +66,8 @@ variable "alb_listener_arn" {
   default     = ""
 }
 */
+
+variable "base_domain" {
+  description = "Base Domain name for the application"
+  type        = string
+}

@@ -96,9 +96,19 @@ output "web_alb_dns" {
   value = module.scaling_web.web_alb_dns
 }
 
-output "webapp_url" {
-  description = "URL of the web application"
-  value = module.scaling_web.webapp_url
+output "webapp_url_http" {
+  description = "URL of the web application non-SSL"
+  value = module.scaling_web.webapp_url_http
+}
+
+output "alt_weblink" {
+  description = "Accessing web application using ALB DNS"
+  value = module.scaling_web.alt_weblink
+}
+
+output "webapp_url_https" {
+  description = "URL of the web application SSL"
+  value = module.scaling_web.webapp_url_https
 }
 
 # Compute outputs
