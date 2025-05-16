@@ -1,13 +1,13 @@
 ################################################################################
 # Network Infrastructure Outputs at root level
 ################################################################################
-
+/*
 # Storage outputs
 output "tf_bucket_name" {
   description = "The S3 bucket name used to store the Terraform state"
   value       = module.storage.tf_bucket_name
 }
-
+*/
 # Network outputs
 output "vpc_id" {
   description = "The ID of the VPC"
@@ -51,6 +51,11 @@ output "bastion_key_pair_name" {
   
 }
 
+output "private_key_name" {
+  description = "Name of the created key pair"
+  value       = module.security.private_key_name
+}
+
 output "sg_web_app_id" {
   description = "The ID of the web app security group"
   value       = module.security.sg_web_app_id
@@ -63,7 +68,14 @@ output "alb_sg_id" {
   
 }
 
+output "web_app_allow_ssh_from_bastion_id" {
+  description = "The ID of the web app security group allowing SSH from bastion"
+  value       = module.security.web_app_allow_ssh_from_bastion_id
+  
+}
+
 # Scaling Module outputs
+
 output "web_listener_arn" {
   description = "ARN of the ALB Listener for the web application"
   value = module.scaling_web.web_listener_arn
@@ -112,9 +124,10 @@ output "web_app_instance_dns" {
   value       = module.web_app.web_app_instance_dns
 }
 */
-
+/*
 # Application outputs
 output "cart_topic_arns" {
   description = "The ARNs of the SNS topics"
   value       = module.app_topics.cart_topic_arns
 }
+*/

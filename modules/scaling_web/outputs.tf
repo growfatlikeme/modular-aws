@@ -32,5 +32,6 @@ output "web_alb_dns" {
 
 output "webapp_url" {
   # value = "http://${data.aws_lb.this.dns_name}/${var.name_prefix}"
-  value = "http://${aws_lb.web_alb.dns_name}/${local.name_prefix}"
+  value = "http://${aws_lb.web_alb.dns_name}/index.html"
 }
+

@@ -59,6 +59,36 @@ resource "aws_security_group" "web_app_allow_tcp80_443" {
   }
 }
 
+resource "aws_security_group" "web_app_allow_ssh_from_bastion" {
+  name        = "${local.name_prefix}-sg-bastion-to-webapp"
+  description = "Allow SSH inbound from bastion and all outbound"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description     = "Allow SSH from bastion"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    security_groups = [aws_security_group.bastion_allow_ssh.id]  # Allow traffic from the bastion security group
+  }
+
+  egress {
+    description      = "Allow all outbound traffic"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  lifecycle {
+    prevent_destroy = false  # Ensures Terraform allows deletion
+  }
+
+  tags = {
+    Name = "${local.name_prefix}-sg-bastion-to-webapp"
+  }
+}
 
 resource "aws_security_group" "alb_sg" {
   name        = "${local.name_prefix}-sg-alb"

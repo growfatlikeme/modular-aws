@@ -31,6 +31,12 @@ variable "sg_web_app_id" {
   description = "Security group ID for the web app instance"      
   
 }
+
+variable "sg_ssh_priv_from_bastion_id" {
+  type = string
+  description = "Security group ID for the web app instance allowing SSH from bastion"      
+  
+}
 /*
 variable "public_subnet" {
  description = "Choice of deploying to public or private subnet"

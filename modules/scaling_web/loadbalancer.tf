@@ -20,7 +20,7 @@ resource "aws_lb_target_group" "web_alb_tg" {
   target_type = "instance"
 
   health_check {
-    path     = "/"
+    path     = "/index.html"
     port     = 80
     protocol = "HTTP"
     timeout  = 3

@@ -13,12 +13,15 @@ resource "aws_launch_template" "web_server_lt" {
   # Security Groups
   network_interfaces {
     associate_public_ip_address = false
-    security_groups = [var.sg_web_app_id] # Use the security group ID passed as a variable
+    security_groups = [var.sg_web_app_id, var.sg_ssh_priv_from_bastion_id] # Use the security group ID passed as a variable
   }
 
-  user_data = base64encode(file("${path.module}/init-script.sh"))
+    # User data script that sets the instance name
+   user_data = base64encode(templatefile("${path.module}/init-script.tpl", {
+    name_prefix = local.name_prefix
+  }))
 
   tags = {
-    Name = "${local.name_prefix}-web_app"
+    Name = "${local.name_prefix}-webapp-template"
   }
 }

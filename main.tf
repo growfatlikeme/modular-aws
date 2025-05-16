@@ -1,11 +1,12 @@
 #high level architecture configuration
 
+/*
 module "storage" {
   source = "./modules/storage"
   name   = var.name 
   environment = var.environment
 }
-
+*/
 module "network" {
   source     = "./modules/network"
   myvpc_cidr = var.myvpc_cidr
@@ -65,15 +66,16 @@ module "scaling_web" {
   private_subnet_ids =  module.network.private_subnet_ids
   alb_sg_id = module.security.alb_sg_id  # pass the security group ID from the security module
   sg_web_app_id = module.security.sg_web_app_id  # pass the security group ID from the security module
-  key_name         = module.security.key_pair_name  # Reference the output from the security module
+  sg_ssh_priv_from_bastion_id = module.security.web_app_allow_ssh_from_bastion_id  # pass the security group ID from the security module
+  key_name         = module.security.private_key_name  # Reference the output from the security module
   depends_on       = [module.network, module.security]
 }
 
-
+/*
 module "app_topics" {
  source      = "./modules/app_topics"
   name       = var.name
   environment        = var.environment
   cart_count = var.cart_count
 }
-
+*/
