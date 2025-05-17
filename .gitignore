@@ -2,9 +2,10 @@
 .terraform/
 
 # sensitive files
-*.iam.tf
+iam/
 keypair.tf
 *.pem
+
 
 #tfstate bucket storage configuration
 setup_backend.sh

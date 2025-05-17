@@ -31,6 +31,12 @@ module "security" {
   
 }
 
+module "iam" {
+  source       = "./modules/iam"
+  name         = var.name
+  environment  = var.environment
+}
+
 module "compute" {
   source     = "./modules/compute"
   name       = var.name
@@ -40,6 +46,7 @@ module "compute" {
   sg_bastion_id = module.security.sg_bastion_id  # Match the exact output name
   public_subnet_ids = module.network.public_subnet_ids
   key_name         = module.security.key_pair_name  # Reference the output from the security module
+  instance_profile_name = module.iam.instance_profile_name  # Reference the output from the security module
   depends_on       = [module.network, module.security]
 }
 

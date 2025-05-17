@@ -13,6 +13,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids      = [var.sg_bastion_id]
   subnet_id                   = each.value
   associate_public_ip_address = true
+  iam_instance_profile = var.instance_profile_name  # Use the instance profile name passed as a variable
  
  
  tags = {

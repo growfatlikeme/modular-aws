@@ -141,3 +141,16 @@ output "cart_topic_arns" {
   value       = module.app_topics.cart_topic_arns
 }
 */
+
+# IAM outputs
+output "data_policy_sample" {
+  description = "IAM Policy Document from AWS"
+  value       = module.iam.data_policy_sample
+  
+}
+
+output "instance_profile_name" {
+  description = "IAM Instance Profile Name"
+  value       = module.iam.instance_profile_name
+  
+}	
