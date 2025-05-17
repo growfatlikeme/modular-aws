@@ -107,3 +107,4 @@ variable "cart_count" {
   description = "Number of cart topics to create"
   type        = number
 }
+

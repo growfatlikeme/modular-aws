@@ -129,3 +129,24 @@ resource "aws_security_group" "alb_sg" {
     Name = "${local.name_prefix}-sg-http_https_alb"
   }
 }
+
+resource "aws_security_group" "rds_sg" {
+  name        = "${local.name_prefix}-rds-sg"
+  description = "Allow DB traffic from bastion sources"
+  vpc_id      = var.vpc_id
+
+  # Example: Allow connections from internal application instances
+  ingress {
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    security_groups = [aws_security_group.bastion_allow_ssh.id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}

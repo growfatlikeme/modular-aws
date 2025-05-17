@@ -39,6 +39,24 @@ output "subnet_names_private" {
   value       = module.network.subnet_names_private
 }
 
+output "database_subnet_ids" {
+  description = "IDs of the database subnets"
+  value       = module.network.database_subnet_ids
+}
+
+output "subnet_names_database" {
+  description = "Names of the database subnets"
+  value = module.network.subnet_names_database
+}
+
+output "database_subnet_group_name" {
+  description = "Name of the database subnet group"
+  value       = module.network.database_subnet_group_name
+}
+  
+  
+  
+
 # Security outputs
 output "sg_bastion_id" {
   description = "ID of the bastion security group"
@@ -68,6 +86,11 @@ output "alb_sg_id" {
   
 }
 
+output "rds_sg_id" {
+  description = "The ID of the RDS security group"
+  value       = module.security.rds_sg_id
+  
+}
 output "web_app_allow_ssh_from_bastion_id" {
   description = "The ID of the web app security group allowing SSH from bastion"
   value       = module.security.web_app_allow_ssh_from_bastion_id
@@ -141,3 +164,23 @@ output "cart_topic_arns" {
   value       = module.app_topics.cart_topic_arns
 }
 */
+
+# IAM outputs
+/*
+output "data_policy_sample" {
+  description = "IAM Policy Document from AWS"
+  value       = module.iam.data_policy_sample
+  
+}
+*/
+output "instance_profile_name" {
+  description = "IAM Instance Profile Name"
+  value       = module.iam.instance_profile_name
+  
+}	
+
+
+output "policy_document" {
+  description = "The JSON document of the IAM policy"
+  value       = module.iam.policy_document
+}

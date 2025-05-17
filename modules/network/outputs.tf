@@ -46,3 +46,22 @@ output "subnet_names_private" {
     subnet.id => subnet.tags["Name"]
   }
 }
+
+output "database_subnet_ids" {
+  description = "IDs of the database subnets"
+  value       = [for subnet in aws_subnet.database_subnets : subnet.id]
+}
+
+output "subnet_names_database" {
+  description = "Names of the database subnets"
+  value = {
+    for subnet in aws_subnet.database_subnets : 
+    subnet.id => subnet.tags["Name"]
+  }
+}
+
+  
+  output "database_subnet_group_name" {
+  description = "Name of the database subnet group"
+  value = aws_db_subnet_group.database.name
+}

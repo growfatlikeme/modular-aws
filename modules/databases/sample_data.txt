@@ -1,0 +1,27 @@
+aws dynamodb put-item \
+    --table-name estee-dev-dynamodb-groceries  \
+    --item \
+        '{"productid": {"S": "978-0134685991"}, "supplier": {"S": "ABC Co"}, "Name": {"S": "Pepsi"}, "Stock": {"N": "1"}}'
+
+aws dynamodb put-item \
+    --table-name estee-dev-dynamodb-groceries  \
+    --item \
+        '{"productid": {"S": "978-0134685009"}, "supplier": {"S": "XYZ Limited"}, "Title": {"S": "Dumplings"}, "Stock": {"N": "2"}}'
+
+aws dynamodb put-item \
+    --table-name estee-dev-dynamodb-groceries \
+    --item \
+        '{"productid": {"S": "974-0134789698"}, "supplier": {"S": "XYZ Limited"}, "Title": {"S": "Corn"}, "Stock": {"N": "10"}}'
+		
+aws dynamodb put-item \
+    --table-name estee-dev-dynamodb-groceries \
+    --item \	
+		'{"productid": {"S": "974-0131239698"}, "supplier": {"S": "Vendor Mamamia"}, "Title": {"S": "Hot wings"}, "Stock": {"N": "8"}}'
+
+
+aws dynamodb query \
+    --table-name estee-dev-dynamodb-groceries \
+    --key-condition-expression "productid = :pid" \
+    --expression-attribute-values '{":pid":{"S":"978-0134685009"}}'
+
+aws dynamodb scan --table-name estee-dev-dynamodb-groceries

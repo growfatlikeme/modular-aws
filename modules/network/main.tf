@@ -71,6 +71,20 @@ resource "aws_subnet" "database_subnets" {
   }
 }
 
+# Create a DB subnet group using db subnets
+resource "aws_db_subnet_group" "database" {
+  name        = "${local.name_prefix}-rds-subnet-group"
+  description = "Database subnet group for ${local.name_prefix}"
+  subnet_ids  = [for subnet in aws_subnet.database_subnets : subnet.id]
+  
+  tags = {
+    Name = "${local.name_prefix}-rds-subnet-group"
+  }
+
+  depends_on = [ aws_subnet.database_subnets ]
+}
+
+
 #create igw
 resource "aws_internet_gateway" "my_igw" {
   vpc_id = aws_vpc.my_vpc.id

@@ -25,6 +25,11 @@ variable "sg_bastion_id" {
   
 }
 
+variable "instance_profile_name" {
+  type = string
+  description = "IAM instance profile name for the bastion instance"
+  
+}
 
 variable "public_subnet_ids" {
   type =  list(string)

@@ -7,6 +7,15 @@ module "storage" {
   environment = var.environment
 }
 */
+
+module "databases" {
+  source     = "./modules/databases"
+  name       = var.name
+  environment        = var.environment
+  database_subnet_group_name = module.network.database_subnet_group_name  # Use the subnet group from the network module
+  rds_sg_id = [module.security.rds_sg_id]  # pass the security group ID from the security module
+}
+
 module "network" {
   source     = "./modules/network"
   myvpc_cidr = var.myvpc_cidr
@@ -31,6 +40,12 @@ module "security" {
   
 }
 
+module "iam" {
+  source       = "./modules/iam"
+  name         = var.name
+  environment  = var.environment
+}
+
 module "compute" {
   source     = "./modules/compute"
   name       = var.name
@@ -40,6 +55,7 @@ module "compute" {
   sg_bastion_id = module.security.sg_bastion_id  # Match the exact output name
   public_subnet_ids = module.network.public_subnet_ids
   key_name         = module.security.key_pair_name  # Reference the output from the security module
+  instance_profile_name = module.iam.instance_profile_name  # Reference the output from the security module
   depends_on       = [module.network, module.security]
 }
 
