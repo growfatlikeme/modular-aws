@@ -20,3 +20,9 @@ variable "rds_sg_id" {
   type = list(string)
   description = "RDS security group ID"
 }
+
+
+variable "region" {
+  type = string
+  description = "AWS region"
+}

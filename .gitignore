@@ -2,7 +2,6 @@
 .terraform/
 
 # sensitive files
-iam/
 keypair.tf
 *.pem
 

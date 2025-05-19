@@ -1,25 +1,27 @@
-resource "aws_dynamodb_table" "groceries" {
-  name         = "${local.name_prefix}-dynamodb-groceries"
-  billing_mode = "PAY_PER_REQUEST"  # On-demand scaling
+resource "aws_dynamodb_table" "dynamodb" {
+  name         = "${local.name_prefix}-dynamodb-books"
+  billing_mode = "PAY_PER_REQUEST"
+
+  # Define primary keys (Partition + Sort Key)
+  hash_key     = "ISBN"
+  range_key    = "Genre"
 
   attribute {
-    name = "productid"
-    type = "S"  # 'S' = String, or use 'N' for Number
-  }
-
-  attribute {
-    name = "supplier"
+    name = "ISBN"
     type = "S"
   }
 
-  # Define primary keys (Partition + Sort Key)
-  hash_key  = "productid"  # Partition Key
-  range_key = "supplier"   # Sort Key
-
-
-
-  tags = {
-    Name = "${local.name_prefix}-dynamodb-groceries"
+  attribute {
+    name = "Genre"
+    type = "S"
   }
 
+  provisioner "local-exec" {
+    command = "/usr/bin/bash ${path.module}/sampledata.sh \"${local.name_prefix}-dynamodb-books\" \"${var.region}\""
+    working_dir = "${path.module}"
+  }
+
+  tags = {
+    Name = "${local.name_prefix}-dynamodb-books"
+  }
 }

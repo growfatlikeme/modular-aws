@@ -24,4 +24,10 @@ aws dynamodb query \
     --key-condition-expression "productid = :pid" \
     --expression-attribute-values '{":pid":{"S":"978-0134685009"}}'
 
-aws dynamodb scan --table-name estee-dev-dynamodb-groceries
+aws dynamodb scan --table-name estee-dev-dynamodb-books
+
+
+aws dynamodb query \
+    --table-name estee-dev-dynamodb-books \
+    --key-condition-expression "ISBN = :isbn" \
+    --expression-attribute-values '{":isbn":{"S":"978-01346854325"}}'

@@ -10,6 +10,7 @@ output "webapp_url" {
 }
 */
 
+/*
 output "web_listener_arn" {
   description = "ARN of the ALB Listener for the web application"
   value = aws_lb_listener.web_listener.arn
@@ -45,3 +46,5 @@ output "alt_weblink" {
    value = "https://${aws_lb.web_alb.dns_name}/index.html"
   
 }
+
+*/

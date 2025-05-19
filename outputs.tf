@@ -96,7 +96,7 @@ output "web_app_allow_ssh_from_bastion_id" {
   value       = module.security.web_app_allow_ssh_from_bastion_id
   
 }
-
+/*
 # Scaling Module outputs
 
 output "web_listener_arn" {
@@ -133,7 +133,7 @@ output "webapp_url_https" {
   description = "URL of the web application SSL"
   value = module.scaling_web.webapp_url_https
 }
-
+*/
 # Compute outputs
 output "bastion_instance_ips" {
   description = "Public IP addresses of the bastion instances"

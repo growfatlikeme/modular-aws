@@ -14,6 +14,7 @@ module "databases" {
   environment        = var.environment
   database_subnet_group_name = module.network.database_subnet_group_name  # Use the subnet group from the network module
   rds_sg_id = [module.security.rds_sg_id]  # pass the security group ID from the security module
+  region = var.aws_region
 }
 
 module "network" {
@@ -46,7 +47,7 @@ module "iam" {
   environment  = var.environment
 }
 
-module "compute" {
+module "compute" {          #this is the bastion host module
   source     = "./modules/compute"
   name       = var.name
   environment        = var.environment
@@ -72,6 +73,7 @@ module "web_app" {
   depends_on       = [module.network, module.security]
 }*/
 
+/*
 module "scaling_web" {
  source = "./modules/scaling_web"
   name       = var.name
@@ -87,6 +89,8 @@ module "scaling_web" {
   base_domain = "scaling-web.com"  # Domain name for the certificate
   depends_on       = [module.network, module.security]
 }
+
+*/
 
 /*
 module "app_topics" {
