@@ -7,7 +7,7 @@ output "vpc_id" {
   value       = aws_vpc.my_vpc.id
 }
 */
-
+/*
 
 # Get Bastion instance information
 output "bastion_instance_ip" {
@@ -27,3 +27,4 @@ output "bastion_instance_dns" {
   }
 
 
+*/

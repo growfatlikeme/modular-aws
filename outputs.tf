@@ -134,6 +134,8 @@ output "webapp_url_https" {
   value = module.scaling_web.webapp_url_https
 }
 */
+
+/*
 # Compute outputs
 output "bastion_instance_ips" {
   description = "Public IP addresses of the bastion instances"
@@ -144,6 +146,7 @@ output "bastion_instance_dns" {
   description = "Public DNS names of the bastion instances"
   value       = module.compute.bastion_instance_dns
 }
+*/
 
 /*
 # WebApp outputs

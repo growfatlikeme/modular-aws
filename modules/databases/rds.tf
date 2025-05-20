@@ -1,3 +1,5 @@
+
+/*
 resource "aws_db_instance" "rds_mysql" {
   identifier           = "${local.name_prefix}-mysql"
   engine              = "mysql"
@@ -14,3 +16,5 @@ resource "aws_db_instance" "rds_mysql" {
   skip_final_snapshot  = true  # Prevents snapshot on deletion
   deletion_protection  = false # Disable deletion protection for easy cleanup
 }
+
+*/

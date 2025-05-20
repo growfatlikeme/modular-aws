@@ -17,8 +17,8 @@ resource "aws_dynamodb_table" "dynamodb" {
   }
 
   provisioner "local-exec" {
-    command = "/usr/bin/bash ${path.module}/sampledata.sh \"${local.name_prefix}-dynamodb-books\" \"${var.region}\""
-    working_dir = "${path.module}"
+    command = "modules/databases/sampledata.sh \"${local.name_prefix}-dynamodb-books\" \"${var.region}\""
+    //working_dir = "${path.module}"
   }
 
   tags = {

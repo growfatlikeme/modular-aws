@@ -47,6 +47,7 @@ module "iam" {
   environment  = var.environment
 }
 
+/*
 module "compute" {          #this is the bastion host module
   source     = "./modules/compute"
   name       = var.name
@@ -59,7 +60,7 @@ module "compute" {          #this is the bastion host module
   instance_profile_name = module.iam.instance_profile_name  # Reference the output from the security module
   depends_on       = [module.network, module.security]
 }
-
+*/
 /*
 module "web_app" {
   source = "./modules/web_app"
