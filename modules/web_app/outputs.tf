@@ -1,19 +1,27 @@
 
 # Get web app instance information
-output "web_app_instance_ip" {
-  description = "Public IP addresses of the web_app instances"
-  value = {
-    for k, instance in aws_instance.web_app : k => instance.public_ip
-  }
+output "ec2_public_instance_ip" {
+  description = "Public IP addresses of the ec2_public instances"
+  value = aws_instance.ec2_public.public_ip
   }
 
 
-output "web_app_instance_dns" {
-  description = "Public DNS names of the web_app instances"
-  value = {
-    for k, instance in aws_instance.web_app : k => instance.public_dns
-  }
-  depends_on = [aws_instance.web_app]
+output "ec2_public_instance_dns" {
+  description = "Public DNS names of the ec2_public instances"
+  value = aws_instance.ec2_public.public_dns
+  depends_on = [aws_instance.ec2_public]
   }
 
 
+output "ec2_public_instance_id" {
+  description = "id of the ec2_public instances"
+  value = aws_instance.ec2_public.id
+  }
+
+
+
+output "ec2_public_instance_availability_zone" {
+  description = "Availability zone of the ec2_public instances"
+  value = aws_instance.ec2_public.availability_zone
+  }
+  

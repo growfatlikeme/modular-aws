@@ -4,22 +4,36 @@ resource "null_resource" "wait_for_key_pair" {
   }
 }
 
-resource "aws_instance" "web_app" {
-  for_each = local.subnet_map
+resource "aws_instance" "ec2_public" {   #create only one instance
 
   ami                         = data.aws_ami.amazon2023.id 
   instance_type               = var.instance_type
   key_name                    = var.key_name  # Use the key name passed as a variable
-  vpc_security_group_ids      = [var.sg_web_app_id] # Use the security group ID passed as a variable
-  subnet_id                   = each.value
+  vpc_security_group_ids      = [var.sg_bastion_id] # Use the security group ID passed as a variable
+  subnet_id                   = element(var.public_subnet_ids, 0) # Use the public subnet ID passed as a variable
   associate_public_ip_address = true
-  user_data = templatefile("${path.module}/init-script.sh", {file_content = "webapp-#${tonumber(each.key) + 1}"})
+  user_data = <<-EOF
+            #!/bin/bash
+            echo "export AWS_DEFAULT_REGION=${var.region}" >> /etc/profile
+            mkdir -p /home/ec2-user/.aws
+            echo "[default]" > /home/ec2-user/.aws/config
+            echo "region = ${var.region}" >> /home/ec2-user/.aws/config
+            chown -R ec2-user:ec2-user /home/ec2-user/.aws
+            while [ ! -e /dev/xvdf ]; do
+              echo "Waiting for EBS volume to be attached..."
+              sleep 10
+            done
+
+            sudo mkfs -t ext4 /dev/xvdf
+            sudo mkdir /mydata
+            sudo mount /dev/xvdf /mydata/
+            EOF
 
   user_data_replace_on_change = true # this forces instance to be recreated upon update of user data contents
  
  
   tags = {
-    Name = "${local.name_prefix}-web_app-${tonumber(each.key) + 1}"
+    Name = "${local.name_prefix}-ec2_public"
   }
 
 

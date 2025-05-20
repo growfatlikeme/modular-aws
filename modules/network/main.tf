@@ -98,6 +98,10 @@ resource "aws_internet_gateway" "my_igw" {
     update = "5m"
     delete = "5m"
   }
+    # Add this lifecycle block
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 #Create public route

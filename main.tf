@@ -61,18 +61,30 @@ module "compute" {          #this is the bastion host module
   depends_on       = [module.network, module.security]
 }
 */
-/*
+
 module "web_app" {
   source = "./modules/web_app"
   name       = var.name
   environment        = var.environment
   instance_type = var.instance_type
+  region = var.aws_region
   vpc_id = module.network.vpc_id  # Pass VPC ID from network module
   public_subnet_ids = module.network.public_subnet_ids
-  sg_web_app_id = module.security.sg_web_app_id  # pass the security group ID from the security module
+  sg_bastion_id    = module.security.sg_bastion_id  # pass the security group ID from the security module to allow ssh access
   key_name         = module.security.key_pair_name  # Reference the output from the security module
   depends_on       = [module.network, module.security]
-}*/
+}
+
+module "ebs" {
+  source = "./modules/ebs"
+  name       = var.name
+  environment        = var.environment
+  azs       = module.web_app.ec2_public_instance_availability_zone
+  instance_ids = module.web_app.ec2_public_instance_id
+ // sg_web_app_id = module.security.sg_web_app_id  # pass the security group ID from the security module
+  
+  depends_on       = [module.web_app]
+}
 
 /*
 module "scaling_web" {

@@ -148,18 +148,30 @@ output "bastion_instance_dns" {
 }
 */
 
-/*
+
 # WebApp outputs
-output "web_app_instance_ips" {
-  description = "Public IP addresses of the web app instances"
-  value       = module.web_app.web_app_instance_ip
+output "ec2_public_instance_ips" {
+  description = "Public IP addresses of the ec2_public instances"
+  value       = module.web_app.ec2_public_instance_ip
 }
 
-output "web_app_instance_dns" {
-  description = "Public DNS names of the web app instances"
-  value       = module.web_app.web_app_instance_dns
+output "ec2_public_instance_dns" {
+  description = "Public DNS names of the ec2_public instances"
+  value       = module.web_app.ec2_public_instance_dns
 }
-*/
+
+output "ec2_public_instance_availability_zone" {
+  description = "Availability zone of the ec2_public instances"
+  value       = module.web_app.ec2_public_instance_availability_zone
+  }
+
+  output "ec2_public_instance_id" {
+  description = "id of the ec2_public instances"
+  value      = module.web_app.ec2_public_instance_id
+  }
+  
+
+
 /*
 # Application outputs
 output "cart_topic_arns" {

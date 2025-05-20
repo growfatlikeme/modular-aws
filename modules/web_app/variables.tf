@@ -20,7 +20,7 @@ variable "vpc_id" {
   description = "value of vpc id"
 }
 
-variable "sg_web_app_id" {
+variable "sg_bastion_id" {
   type = string
   description = "Security group ID for the web app instance"      
   
@@ -35,4 +35,10 @@ variable "public_subnet_ids" {
 variable "key_name" {
   description = "Name of the SSH key pair to use for instances"
   type        = string
+}
+
+variable "region" {
+  type = string
+  description = "AWS region"
+  
 }
