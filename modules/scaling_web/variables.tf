@@ -71,3 +71,14 @@ variable "base_domain" {
   description = "Base Domain name for the application"
   type        = string
 }
+
+variable "hosted_zone_id" {
+  description = "Hosted Zone ID for the domain"
+  type        = string
+  
+}
+
+variable "website_configuration_domain" {
+  description = "Website configuration domain for the S3 bucket"
+  type        = string
+}

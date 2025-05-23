@@ -1,3 +1,4 @@
+/*
 #see variables.tf for variable definitions in part 1, then locals.tf for local variables
 # 2. Request an SSL certificate from ACM
 resource "aws_acm_certificate" "cert" {
@@ -12,7 +13,7 @@ resource "aws_acm_certificate" "cert" {
     create_before_destroy = true
   }
 }
-
+*/
 
 # Find the existing hosted zone
 data "aws_route53_zone" "parent" {
@@ -20,7 +21,7 @@ data "aws_route53_zone" "parent" {
   private_zone = false       # Set to true if it's a private zone
 }
 
-
+/*
 # Create DNS validation records in the parent zone
 resource "aws_route53_record" "cert_validation" {
   for_each = {
@@ -56,4 +57,19 @@ resource "aws_route53_record" "subdomain" {
     zone_id                = aws_lb.web_alb.zone_id
     evaluate_target_health = true
   }
+}
+
+*/
+# Create a subdomain record pointing to your S3 bucket
+# This is for the static website hosted in S3 - see storage module
+resource "aws_route53_record" "www" {
+ zone_id = data.aws_route53_zone.parent.zone_id
+ name = "${local.name_prefix}-s3." # Bucket prefix before sctp-sandbox.com
+ type = "A"
+
+ alias {
+   name = var.website_configuration_domain
+   zone_id = var.hosted_zone_id
+   evaluate_target_health = true
+ }
 }

@@ -1,13 +1,15 @@
 #high level architecture configuration
 
-/*
+
 module "storage" {
   source = "./modules/storage"
   name   = var.name 
   environment = var.environment
+  s3_web_policy = module.iam.aws_s3_bucket_policy  # Pass the S3 bucket policy from the IAM module
+  
 }
-*/
 
+/*
 module "databases" {
   source     = "./modules/databases"
   name       = var.name
@@ -15,7 +17,7 @@ module "databases" {
   database_subnet_group_name = module.network.database_subnet_group_name  # Use the subnet group from the network module
   rds_sg_id = [module.security.rds_sg_id]  # pass the security group ID from the security module
   region = var.aws_region
-}
+}*/
 
 module "network" {
   source     = "./modules/network"
@@ -41,10 +43,11 @@ module "security" {
   
 }
 
-module "iam" {
+module "iam" {            #policies and roles defined here
   source       = "./modules/iam"
   name         = var.name
   environment  = var.environment
+  bucket_name = module.storage.tf_bucket_name
 }
 
 /*
@@ -75,6 +78,7 @@ module "web_app" {
   depends_on       = [module.network, module.security]
 }
 
+/*
 module "ebs" {
   source = "./modules/ebs"
   name       = var.name
@@ -85,12 +89,13 @@ module "ebs" {
   
   depends_on       = [module.web_app]
 }
+*/
 
-/*
 module "scaling_web" {
  source = "./modules/scaling_web"
   name       = var.name
   environment        = var.environment
+  #for launch template, ASG, Load Balancer, and Target Group
   instance_type = var.instance_type
   vpc_id = module.network.vpc_id  # Pass VPC ID from network module
   public_subnet_ids = module.network.public_subnet_ids
@@ -100,10 +105,16 @@ module "scaling_web" {
   sg_ssh_priv_from_bastion_id = module.security.web_app_allow_ssh_from_bastion_id  # pass the security group ID from the security module
   key_name         = module.security.private_key_name  # Reference the output from the security module
   base_domain = "scaling-web.com"  # Domain name for the certificate
+  
+  #for bucket Route53 configuration
+  hosted_zone_id = module.storage.tf_bucket_hosted_zone_id  # Use the hosted zone ID from the storage module
+  website_configuration_domain = module.storage.website_configuration_domain  # Use the domain from the storage module
+  
   depends_on       = [module.network, module.security]
+
 }
 
-*/
+
 
 /*
 module "app_topics" {

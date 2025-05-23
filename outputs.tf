@@ -1,13 +1,44 @@
 ################################################################################
 # Network Infrastructure Outputs at root level
 ################################################################################
-/*
+
 # Storage outputs
 output "tf_bucket_name" {
   description = "The S3 bucket name used to store the Terraform state"
   value       = module.storage.tf_bucket_name
 }
-*/
+
+output "tf_bucket_arn" {
+  value = module.storage.tf_bucket_arn
+  description = "The ARN of the S3 bucket"
+  
+}
+
+output "tf_bucket_domain_name" {
+  value = module.storage.tf_bucket_domain_name
+  description = "The domain name of the S3 bucket"
+  
+
+}
+
+output "tf_bucket_website_url" {
+  value = module.storage.tf_bucket_website_url
+  description = "The website URL of the S3 bucket"
+
+}
+
+output "tf_bucket_hosted_zone_id" {
+  value = module.storage.tf_bucket_hosted_zone_id
+  description = "The hosted zone ID of the S3 bucket"
+  
+}
+
+output "website_configuration_domain" {
+  value = module.storage.website_configuration_domain
+  description = "The website configuration of the S3 bucket"
+  
+}
+
 # Network outputs
 output "vpc_id" {
   description = "The ID of the VPC"
@@ -198,4 +229,10 @@ output "instance_profile_name" {
 output "policy_document" {
   description = "The JSON document of the IAM policy"
   value       = module.iam.policy_document
+}
+
+output "aws_s3_bucket_policy" {
+  description = "The policy of the S3 bucket"
+  value       = module.iam.aws_s3_bucket_policy
+  
 }

@@ -1,11 +1,70 @@
 
-# This module creates an S3 bucket for storing Terraform state files.
-resource "aws_s3_bucket" "sample_bucket" {  
-  bucket = "${local.name_prefix}-tf-bucket-for-fun"
+# This module creates an S3 bucket for hosting a static website.
+# For policy document defined for this bucket, see the IAM module.
+resource "aws_s3_bucket" "s3bucket" {  
+  bucket = "${local.name_prefix}-s3.sctp-sandbox.com"
 
-  
+  tags = {
+    Name = "${local.name_prefix}-s3.sctp-sandbox.com"
+  }
+
+  force_destroy = true
 }
 
+resource "aws_s3_bucket_website_configuration" "static_site" {
+  bucket = aws_s3_bucket.s3bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+}
+
+# Allow public access
+resource "aws_s3_bucket_public_access_block" "allow_public_access" {
+  bucket = aws_s3_bucket.s3bucket.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+
+# Create a null resource to trigger the sync
+resource "null_resource" "website_sync" {
+  # Trigger sync when any of these change
+  triggers = {
+    bucket_name = aws_s3_bucket.s3bucket.id
+    # Add a timestamp to force sync on every apply if needed
+    timestamp = timestamp()
+  }
+
+  # Use local-exec to run aws s3 sync
+  provisioner "local-exec" {
+    command = <<-EOT
+      echo "Starting website sync to ${aws_s3_bucket.s3bucket.bucket}..."
+      aws s3 sync modules/storage/website/ s3://${aws_s3_bucket.s3bucket.bucket}/ --exclude \"*.MD\" --exclude \".git*\"
+      if [ $? -eq 0 ]; then
+        echo "Website sync completed successfully"
+      else
+        echo "Website sync failed with exit code $?"
+        exit 1
+      fi
+    EOT
+  }
+
+  # Only run after the bucket and all its configurations are created
+  depends_on = [
+    aws_s3_bucket.s3bucket,
+    aws_s3_bucket_website_configuration.static_site,
+    aws_s3_bucket_public_access_block.allow_public_access,
+    var.s3_web_policy
+  ]
+}
+
+
+/*
 # Enable versioning on the S3 bucket
 resource "aws_s3_bucket_versioning" "sample_bucket_versioning" {
   bucket = aws_s3_bucket.sample_bucket.id
@@ -14,6 +73,7 @@ resource "aws_s3_bucket_versioning" "sample_bucket_versioning" {
     status = "Suspended"  # Set to "Enabled" if you want to enable versioning
   }
 }
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "sample_bucket_encryption" {
   bucket = aws_s3_bucket.sample_bucket.id
 
@@ -31,13 +91,5 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "sample_bucket_enc
    
   }
 }
+*/
 
-# Block public access
-resource "aws_s3_bucket_public_access_block" "sample_bucket_public_access" {
-  bucket = aws_s3_bucket.sample_bucket.id
-
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}

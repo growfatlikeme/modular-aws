@@ -1,3 +1,5 @@
+/*
+
 resource "aws_autoscaling_group" "web_asg" {
   name                = "${local.name_prefix}-web-asg"
   min_size            = 2
@@ -18,3 +20,5 @@ resource "aws_autoscaling_group" "web_asg" {
     propagate_at_launch = true  # This propagates the tag to instances launched by the ASG
   }
 }
+
+*/

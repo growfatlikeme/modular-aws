@@ -1,4 +1,4 @@
-
+/*
 resource "aws_lb" "web_alb" {
   
   name               = "${local.name_prefix}-webapp-lb"

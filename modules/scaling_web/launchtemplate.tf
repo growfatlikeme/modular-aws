@@ -1,3 +1,4 @@
+/*
 resource "aws_launch_template" "web_server_lt" {
   name                   = "${local.name_prefix}-launch-template"
   description            = "private web app launch template"
@@ -25,3 +26,5 @@ resource "aws_launch_template" "web_server_lt" {
     Name = "${local.name_prefix}-webapp-template"
   }
 }
+
+*/
