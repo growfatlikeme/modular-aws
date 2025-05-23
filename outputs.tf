@@ -230,9 +230,3 @@ output "policy_document" {
   description = "The JSON document of the IAM policy"
   value       = module.iam.policy_document
 }
-
-output "aws_s3_bucket_policy" {
-  description = "The policy of the S3 bucket"
-  value       = module.iam.aws_s3_bucket_policy
-  
-}

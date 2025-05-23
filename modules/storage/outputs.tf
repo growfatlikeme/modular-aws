@@ -37,3 +37,9 @@ output "website_configuration_domain" {
   description = "The website configuration of the S3 bucket"
   
 }
+
+output "public_access_block_id" {
+  value = aws_s3_bucket_public_access_block.allow_public_access.id
+  description = "The public access block configuration of the S3 bucket"
+  
+}

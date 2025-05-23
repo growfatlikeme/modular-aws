@@ -14,9 +14,3 @@ output "policy_document" {
   description = "The JSON document of the IAM policy"
   value       = aws_iam_policy.policy_sample.policy
 }
-
-output "aws_s3_bucket_policy" {
-  description = "The policy of the S3 bucket"
-  value       = aws_s3_bucket_policy.public_access.policy
-  
-}

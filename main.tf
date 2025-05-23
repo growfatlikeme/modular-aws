@@ -5,7 +5,6 @@ module "storage" {
   source = "./modules/storage"
   name   = var.name 
   environment = var.environment
-  s3_web_policy = module.iam.aws_s3_bucket_policy  # Pass the S3 bucket policy from the IAM module
   
 }
 
@@ -47,7 +46,7 @@ module "iam" {            #policies and roles defined here
   source       = "./modules/iam"
   name         = var.name
   environment  = var.environment
-  bucket_name = module.storage.tf_bucket_name
+
 }
 
 /*
