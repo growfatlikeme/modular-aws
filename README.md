@@ -13,17 +13,17 @@
 
 ## :running: Running the code locally
 
-`terraform init`
-`terraform plan -var-file="dev.tfvars" `
-`terraform apply -var-file="dev.tfvars" -lock=false -target=aws_dynamodb_table.terraform_state_lock`
-`terraform apply -var-file="dev.tfvars" -lock=false `
-`terraform destroy -var-file="dev.tfvars" -lock=false`
+`terraform init` <br>
+`terraform plan -var-file="dev.tfvars" ` <br>
+`terraform apply -var-file="dev.tfvars" -lock=false -target=aws_dynamodb_table.terraform_state_lock` <br>
+`terraform apply -var-file="dev.tfvars" -lock=false ` <br>
+`terraform destroy -var-file="dev.tfvars" -lock=false` <br>
 
 ## :sunglasses: Modules introduction
 
 **_root directory_** - invokes modules to run
 
-**app_topics\*** - create AWS Simple Notification Service (SNS) topic
+**_app_topics_** - create AWS Simple Notification Service (SNS) topic
 
 **_compute_** - this is where bastion host gets created, simply set subnet_id value to private subnet if instances is to be created in private subnet instead.
 
