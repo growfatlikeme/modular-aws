@@ -23,24 +23,22 @@ resource "aws_s3_bucket_website_configuration" "static_site" {
 # Allow public access
 resource "aws_s3_bucket_public_access_block" "allow_public_access" {
   bucket = aws_s3_bucket.s3bucket.id
-
-  block_public_acls       = false
+  
   block_public_policy     = false
-  ignore_public_acls      = false
   restrict_public_buckets = false
 }
-
+/*
 # Add a small delay to ensure the public access block settings are propagated
 resource "time_sleep" "wait_for_public_access_block" {
   depends_on = [aws_s3_bucket_public_access_block.allow_public_access]
   create_duration = "10s"
 }
 
-
+*/
 
 resource "aws_s3_bucket_policy" "public_access" {
   bucket = aws_s3_bucket.s3bucket.id
-  depends_on = [time_sleep.wait_for_public_access_block]
+  depends_on = [aws_s3_bucket_public_access_block.allow_public_access]
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -85,7 +83,7 @@ resource "null_resource" "website_sync" {
     aws_s3_bucket.s3bucket,
     aws_s3_bucket_website_configuration.static_site,
     aws_s3_bucket_public_access_block.allow_public_access,
-    time_sleep.wait_for_public_access_block
+   // time_sleep.wait_for_public_access_block
   ]
 }
 
